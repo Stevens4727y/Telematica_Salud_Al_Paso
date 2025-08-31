@@ -156,7 +156,14 @@ async def create_appointment(appointment: AppointmentCreate):
     appointment_dict = appointment.dict()
     appointment_obj = MedicalAppointment(**appointment_dict)
     
-    result = await db.appointments.insert_one(appointment_obj.dict())
+    # Convert date objects to strings for MongoDB storage
+    appointment_data = appointment_obj.dict()
+    if 'appointment_date' in appointment_data and isinstance(appointment_data['appointment_date'], date):
+        appointment_data['appointment_date'] = appointment_data['appointment_date'].isoformat()
+    if 'created_at' in appointment_data and isinstance(appointment_data['created_at'], datetime):
+        appointment_data['created_at'] = appointment_data['created_at'].isoformat()
+    
+    result = await db.appointments.insert_one(appointment_data)
     return appointment_obj
 
 @api_router.get("/appointments", response_model=List[MedicalAppointment])
