@@ -196,6 +196,10 @@ async def update_appointment(appointment_id: str, appointment_update: Appointmen
     """Update a medical appointment"""
     update_data = {k: v for k, v in appointment_update.dict().items() if v is not None}
     
+    # Convert date objects to strings for MongoDB storage
+    if 'appointment_date' in update_data and isinstance(update_data['appointment_date'], date):
+        update_data['appointment_date'] = update_data['appointment_date'].isoformat()
+    
     result = await db.appointments.update_one(
         {"id": appointment_id},
         {"$set": update_data}
@@ -205,6 +209,11 @@ async def update_appointment(appointment_id: str, appointment_update: Appointmen
         raise HTTPException(status_code=404, detail="Appointment not found")
     
     updated_appointment = await db.appointments.find_one({"id": appointment_id})
+    # Convert string dates back to date objects
+    if 'appointment_date' in updated_appointment and isinstance(updated_appointment['appointment_date'], str):
+        updated_appointment['appointment_date'] = datetime.fromisoformat(updated_appointment['appointment_date']).date()
+    if 'created_at' in updated_appointment and isinstance(updated_appointment['created_at'], str):
+        updated_appointment['created_at'] = datetime.fromisoformat(updated_appointment['created_at'])
     return MedicalAppointment(**updated_appointment)
 
 @api_router.delete("/appointments/{appointment_id}")
