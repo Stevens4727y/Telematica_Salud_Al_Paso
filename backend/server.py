@@ -170,6 +170,12 @@ async def create_appointment(appointment: AppointmentCreate):
 async def get_appointments():
     """Get all medical appointments"""
     appointments = await db.appointments.find().sort("appointment_date", 1).to_list(1000)
+    # Convert string dates back to date objects
+    for appointment in appointments:
+        if 'appointment_date' in appointment and isinstance(appointment['appointment_date'], str):
+            appointment['appointment_date'] = datetime.fromisoformat(appointment['appointment_date']).date()
+        if 'created_at' in appointment and isinstance(appointment['created_at'], str):
+            appointment['created_at'] = datetime.fromisoformat(appointment['created_at'])
     return [MedicalAppointment(**appointment) for appointment in appointments]
 
 @api_router.get("/appointments/{appointment_id}", response_model=MedicalAppointment)
