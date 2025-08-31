@@ -15,7 +15,7 @@ SplashScreen.preventAutoHideAsync();
 
 const { width, height } = Dimensions.get('window');
 
-export default function SplashScreen() {
+export default function Index() {
   const router = useRouter();
   const [isReady, setIsReady] = useState(false);
 
