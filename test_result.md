@@ -116,54 +116,69 @@ backend:
       - working: true
         agent: "main" 
         comment: "Backend server implemented with all models for emergencies, appointments, consultations and health tips"
+      - working: true
+        agent: "testing"
+        comment: "Comprehensive testing completed. GET /api/ and GET /api/health endpoints working correctly. Server responds with proper JSON format and health status."
   
   - task: "Emergency reports API endpoints"
     implemented: true
-    working: "NA"
+    working: true
     file: "/app/backend/server.py"
     stuck_count: 0
     priority: "high"
-    needs_retesting: true
+    needs_retesting: false
     status_history:
       - working: "NA"
         agent: "main"
         comment: "POST /api/emergencies and GET /api/emergencies endpoints implemented"
+      - working: true
+        agent: "testing"
+        comment: "All emergency endpoints tested successfully: POST /api/emergencies (create), GET /api/emergencies (list), PUT /api/emergencies/{id} (update status). Data persistence verified in MongoDB. Realistic emergency data with GPS coordinates working properly."
   
   - task: "Medical appointments CRUD API"
     implemented: true
-    working: "NA"
+    working: true
     file: "/app/backend/server.py"
     stuck_count: 0
     priority: "high"
-    needs_retesting: true
+    needs_retesting: false
     status_history:
       - working: "NA"
         agent: "main"
         comment: "Full CRUD operations for appointments implemented with proper models"
+      - working: true
+        agent: "testing"
+        comment: "Complete CRUD testing successful: POST /api/appointments (create), GET /api/appointments (list), GET /api/appointments/{id} (get specific), PUT /api/appointments/{id} (update), DELETE /api/appointments/{id} (delete). Fixed date serialization issue for MongoDB compatibility. All operations working with proper validation and error handling."
   
   - task: "Medical consultations API"
     implemented: true
-    working: "NA"
+    working: true
     file: "/app/backend/server.py"
     stuck_count: 0
     priority: "high"
-    needs_retesting: true
+    needs_retesting: false
     status_history:
       - working: "NA"
         agent: "main"
         comment: "POST and GET endpoints for medical consultations implemented"
+      - working: true
+        agent: "testing"
+        comment: "All consultation endpoints tested successfully: POST /api/consultations (create), GET /api/consultations (list), GET /api/consultations/{id} (get specific). Virtual and presential consultation types working. Data persistence verified."
   
   - task: "Health tips API"
     implemented: true
-    working: "NA"
+    working: true
     file: "/app/backend/server.py"
     stuck_count: 0
     priority: "medium"
-    needs_retesting: true
+    needs_retesting: false
     status_history:
       - working: "NA"
         agent: "main"
         comment: "Static health tips endpoint implemented with 6 predefined tips"
+      - working: true
+        agent: "testing"
+        comment: "GET /api/health-tips endpoint tested successfully. Returns 6 health tips in Spanish with proper structure (id, title, content, category). All tips related to health and wellness as expected for UNAN health app."
 
 frontend:
   - task: "Splash screen with UNAN logo"
