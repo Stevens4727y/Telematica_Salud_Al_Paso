@@ -58,6 +58,12 @@ class MedicalAppointment(BaseModel):
     status: str = "scheduled"  # scheduled, confirmed, completed, cancelled
     notes: Optional[str] = ""
     created_at: datetime = Field(default_factory=datetime.utcnow)
+    
+    class Config:
+        json_encoders = {
+            date: lambda v: v.isoformat(),
+            datetime: lambda v: v.isoformat()
+        }
 
 class AppointmentCreate(BaseModel):
     patient_name: str
