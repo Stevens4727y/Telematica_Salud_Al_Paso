@@ -184,6 +184,11 @@ async def get_appointment(appointment_id: str):
     appointment = await db.appointments.find_one({"id": appointment_id})
     if not appointment:
         raise HTTPException(status_code=404, detail="Appointment not found")
+    # Convert string dates back to date objects
+    if 'appointment_date' in appointment and isinstance(appointment['appointment_date'], str):
+        appointment['appointment_date'] = datetime.fromisoformat(appointment['appointment_date']).date()
+    if 'created_at' in appointment and isinstance(appointment['created_at'], str):
+        appointment['created_at'] = datetime.fromisoformat(appointment['created_at'])
     return MedicalAppointment(**appointment)
 
 @api_router.put("/appointments/{appointment_id}", response_model=MedicalAppointment)
