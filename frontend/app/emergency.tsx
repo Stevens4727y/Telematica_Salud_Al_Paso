@@ -22,6 +22,15 @@ export default function Emergency() {
   const [formData, setFormData] = useState({
     patientName: '',
     phone: '',
+    age: '',
+    idNumber: '',
+    bloodType: '',
+    allergies: '',
+    medicalConditions: '',
+    medications: '',
+    emergencyContactName: '',
+    emergencyContactPhone: '',
+    insurance: '',
     emergencyType: '',
     description: '',
   });
