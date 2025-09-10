@@ -337,7 +337,7 @@ DESCRIPCIÓN: ${formData.description}`,
                     styles.typeButton,
                     formData.emergencyType === type && styles.typeButtonSelected,
                   ]}
-                  onPress={() => setFormData({ ...formData, emergencyType: type })}
+                  onPress={() => setFormData({ ...formData, emergencyType: type, customEmergencyType: type === 'Otro' ? formData.customEmergencyType : '' })}
                 >
                   <Text
                     style={[
@@ -350,6 +350,20 @@ DESCRIPCIÓN: ${formData.description}`,
                 </TouchableOpacity>
               ))}
             </ScrollView>
+            
+            {/* Campo condicional para "Otro" */}
+            {formData.emergencyType === 'Otro' && (
+              <View style={styles.customTypeContainer}>
+                <Text style={styles.customTypeLabel}>Especificar tipo de emergencia:</Text>
+                <TextInput
+                  style={styles.input}
+                  value={formData.customEmergencyType}
+                  onChangeText={(text) => setFormData({ ...formData, customEmergencyType: text })}
+                  placeholder="Describe el tipo de emergencia..."
+                  placeholderTextColor="#999"
+                />
+              </View>
+            )}
           </View>
 
           <View style={styles.inputGroup}>
