@@ -43,6 +43,9 @@ export default function Emergency() {
     'Intoxicación',
     'Quemadura',
     'Dificultad Respiratoria',
+    'Convulsiones',
+    'Hemorragia',
+    'Pérdida de Conciencia',
     'Otro',
   ];
 
