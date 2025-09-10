@@ -88,12 +88,22 @@ export default function Emergency() {
       return;
     }
 
+    if (formData.emergencyType === 'Otro' && !formData.customEmergencyType.trim()) {
+      Alert.alert('Error', 'Por favor especifica el tipo de emergencia.');
+      return;
+    }
+
     if (!location) {
       Alert.alert('Error', 'No se pudo obtener la ubicación. Intenta nuevamente.');
       return;
     }
 
     setLoading(true);
+
+    // Determinar el tipo de emergencia final
+    const finalEmergencyType = formData.emergencyType === 'Otro' 
+      ? formData.customEmergencyType 
+      : formData.emergencyType;
 
     try {
       const response = await fetch(`${process.env.EXPO_PUBLIC_BACKEND_URL}/api/emergencies`, {
@@ -105,7 +115,7 @@ export default function Emergency() {
           patient_name: formData.patientName,
           phone: formData.phone,
           location: location,
-          emergency_type: formData.emergencyType,
+          emergency_type: finalEmergencyType,
           description: `INFORMACIÓN PERSONAL:
 Edad: ${formData.age} años
 ${formData.idNumber ? `Cédula: ${formData.idNumber}` : ''}
