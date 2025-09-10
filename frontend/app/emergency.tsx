@@ -79,8 +79,8 @@ export default function Emergency() {
   };
 
   const handleEmergencySubmit = async () => {
-    if (!formData.patientName || !formData.phone || !formData.emergencyType) {
-      Alert.alert('Error', 'Por favor completa todos los campos obligatorios.');
+    if (!formData.patientName || !formData.phone || !formData.emergencyType || !formData.age) {
+      Alert.alert('Error', 'Por favor completa todos los campos obligatorios (*).');
       return;
     }
 
@@ -102,7 +102,17 @@ export default function Emergency() {
           phone: formData.phone,
           location: location,
           emergency_type: formData.emergencyType,
-          description: formData.description,
+          description: `INFORMACIÓN PERSONAL:
+Edad: ${formData.age} años
+${formData.idNumber ? `Cédula: ${formData.idNumber}` : ''}
+${formData.bloodType ? `Tipo de Sangre: ${formData.bloodType}` : ''}
+${formData.allergies ? `Alergias: ${formData.allergies}` : ''}
+${formData.medicalConditions ? `Condiciones Médicas: ${formData.medicalConditions}` : ''}
+${formData.medications ? `Medicamentos: ${formData.medications}` : ''}
+${formData.emergencyContactName ? `Contacto de Emergencia: ${formData.emergencyContactName} - ${formData.emergencyContactPhone}` : ''}
+${formData.insurance ? `Seguro Médico: ${formData.insurance}` : ''}
+
+DESCRIPCIÓN: ${formData.description}`,
         }),
       });
 
