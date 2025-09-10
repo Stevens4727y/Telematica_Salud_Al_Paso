@@ -524,6 +524,34 @@ const styles = StyleSheet.create({
   typeButtonTextSelected: {
     color: '#FFFFFF',
   },
+  rowInputs: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'flex-start',
+  },
+  bloodTypeButton: {
+    paddingHorizontal: 12,
+    paddingVertical: 8,
+    borderRadius: 15,
+    borderWidth: 1,
+    borderColor: '#E1E1E1',
+    marginRight: 8,
+    backgroundColor: '#FFFFFF',
+    minWidth: 45,
+    alignItems: 'center',
+  },
+  bloodTypeButtonSelected: {
+    backgroundColor: '#FF6B6B',
+    borderColor: '#FF6B6B',
+  },
+  bloodTypeButtonText: {
+    fontSize: 14,
+    color: '#666',
+    fontWeight: '500',
+  },
+  bloodTypeButtonTextSelected: {
+    color: '#FFFFFF',
+  },
   emergencyButton: {
     backgroundColor: '#FF6B6B',
     marginHorizontal: 20,
