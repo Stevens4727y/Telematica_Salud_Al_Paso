@@ -174,30 +174,154 @@ DESCRIPCIÓN: ${formData.description}`,
 
         {/* Emergency Form */}
         <View style={styles.formCard}>
-          <Text style={styles.formTitle}>Información de Emergencia</Text>
+          <Text style={styles.formTitle}>Información Personal del Paciente</Text>
           
           <View style={styles.inputGroup}>
-            <Text style={styles.label}>Nombre del Paciente *</Text>
+            <Text style={styles.label}>Nombre Completo *</Text>
             <TextInput
               style={styles.input}
               value={formData.patientName}
               onChangeText={(text) => setFormData({ ...formData, patientName: text })}
-              placeholder="Ingresa el nombre completo"
+              placeholder="Nombre y apellidos completos"
+              placeholderTextColor="#999"
+            />
+          </View>
+
+          <View style={styles.rowInputs}>
+            <View style={[styles.inputGroup, { flex: 0.48 }]}>
+              <Text style={styles.label}>Edad *</Text>
+              <TextInput
+                style={styles.input}
+                value={formData.age}
+                onChangeText={(text) => setFormData({ ...formData, age: text })}
+                placeholder="Años"
+                placeholderTextColor="#999"
+                keyboardType="numeric"
+              />
+            </View>
+            
+            <View style={[styles.inputGroup, { flex: 0.48 }]}>
+              <Text style={styles.label}>Cédula/ID</Text>
+              <TextInput
+                style={styles.input}
+                value={formData.idNumber}
+                onChangeText={(text) => setFormData({ ...formData, idNumber: text })}
+                placeholder="Número de identidad"
+                placeholderTextColor="#999"
+              />
+            </View>
+          </View>
+
+          <View style={styles.inputGroup}>
+            <Text style={styles.label}>Teléfono Principal *</Text>
+            <TextInput
+              style={styles.input}
+              value={formData.phone}
+              onChangeText={(text) => setFormData({ ...formData, phone: text })}
+              placeholder="Número de teléfono principal"
+              placeholderTextColor="#999"
+              keyboardType="phone-pad"
+            />
+          </View>
+
+          <View style={styles.inputGroup}>
+            <Text style={styles.label}>Tipo de Sangre</Text>
+            <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.typeSelector}>
+              {['A+', 'A-', 'B+', 'B-', 'AB+', 'AB-', 'O+', 'O-'].map((type) => (
+                <TouchableOpacity
+                  key={type}
+                  style={[
+                    styles.bloodTypeButton,
+                    formData.bloodType === type && styles.bloodTypeButtonSelected,
+                  ]}
+                  onPress={() => setFormData({ ...formData, bloodType: type })}
+                >
+                  <Text
+                    style={[
+                      styles.bloodTypeButtonText,
+                      formData.bloodType === type && styles.bloodTypeButtonTextSelected,
+                    ]}
+                  >
+                    {type}
+                  </Text>
+                </TouchableOpacity>
+              ))}
+            </ScrollView>
+          </View>
+
+          <View style={styles.inputGroup}>
+            <Text style={styles.label}>Alergias Conocidas</Text>
+            <TextInput
+              style={styles.input}
+              value={formData.allergies}
+              onChangeText={(text) => setFormData({ ...formData, allergies: text })}
+              placeholder="Alergias a medicamentos, alimentos, etc."
               placeholderTextColor="#999"
             />
           </View>
 
           <View style={styles.inputGroup}>
-            <Text style={styles.label}>Teléfono de Contacto *</Text>
+            <Text style={styles.label}>Condiciones Médicas Preexistentes</Text>
+            <TextInput
+              style={[styles.input, styles.textArea]}
+              value={formData.medicalConditions}
+              onChangeText={(text) => setFormData({ ...formData, medicalConditions: text })}
+              placeholder="Diabetes, hipertensión, asma, etc."
+              placeholderTextColor="#999"
+              multiline
+              numberOfLines={2}
+              textAlignVertical="top"
+            />
+          </View>
+
+          <View style={styles.inputGroup}>
+            <Text style={styles.label}>Medicamentos Actuales</Text>
+            <TextInput
+              style={[styles.input, styles.textArea]}
+              value={formData.medications}
+              onChangeText={(text) => setFormData({ ...formData, medications: text })}
+              placeholder="Medicamentos que toma regularmente"
+              placeholderTextColor="#999"
+              multiline
+              numberOfLines={2}
+              textAlignVertical="top"
+            />
+          </View>
+
+          <View style={styles.inputGroup}>
+            <Text style={styles.label}>Contacto de Emergencia</Text>
             <TextInput
               style={styles.input}
-              value={formData.phone}
-              onChangeText={(text) => setFormData({ ...formData, phone: text })}
-              placeholder="Número de teléfono"
+              value={formData.emergencyContactName}
+              onChangeText={(text) => setFormData({ ...formData, emergencyContactName: text })}
+              placeholder="Nombre del familiar o contacto"
+              placeholderTextColor="#999"
+            />
+            <TextInput
+              style={[styles.input, { marginTop: 8 }]}
+              value={formData.emergencyContactPhone}
+              onChangeText={(text) => setFormData({ ...formData, emergencyContactPhone: text })}
+              placeholder="Teléfono del contacto de emergencia"
               placeholderTextColor="#999"
               keyboardType="phone-pad"
             />
           </View>
+
+          <View style={styles.inputGroup}>
+            <Text style={styles.label}>Seguro Médico/EPS</Text>
+            <TextInput
+              style={styles.input}
+              value={formData.insurance}
+              onChangeText={(text) => setFormData({ ...formData, insurance: text })}
+              placeholder="Nombre del seguro o EPS"
+              placeholderTextColor="#999"
+            />
+          </View>
+        </View>
+
+        {/* Emergency Details */}
+        <View style={styles.formCard}>
+          <Text style={styles.formTitle}>Detalles de la Emergencia</Text>
 
           <View style={styles.inputGroup}>
             <Text style={styles.label}>Tipo de Emergencia *</Text>
