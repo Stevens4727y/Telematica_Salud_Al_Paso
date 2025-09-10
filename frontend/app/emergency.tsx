@@ -580,6 +580,18 @@ const styles = StyleSheet.create({
   bloodTypeButtonTextSelected: {
     color: '#FFFFFF',
   },
+  customTypeContainer: {
+    marginTop: 15,
+    paddingTop: 15,
+    borderTopWidth: 1,
+    borderTopColor: '#F0F0F0',
+  },
+  customTypeLabel: {
+    fontSize: 14,
+    fontWeight: '600',
+    color: '#FF6B6B',
+    marginBottom: 8,
+  },
   emergencyButton: {
     backgroundColor: '#FF6B6B',
     marginHorizontal: 20,
