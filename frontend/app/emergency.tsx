@@ -32,6 +32,7 @@ export default function Emergency() {
     emergencyContactPhone: '',
     insurance: '',
     emergencyType: '',
+    customEmergencyType: '',
     description: '',
   });
 
